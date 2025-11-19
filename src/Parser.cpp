@@ -99,14 +99,22 @@ Statement* Parser::parseLet(TokenStream& tokens,
   }
 
   auto expr = parseExpression(tokens);
-
+  Statement* stmt;
+  LetStatement letstmt(varName,expr);
+  stmt = &letstmt;
+  return stmt;
   // TODO: create a corresponding stmt and return it.
 }
 
 Statement* Parser::parsePrint(TokenStream& tokens,
                               const std::string& originLine) const {
   auto expr = parseExpression(tokens);
+  Statement* stmt;
+  PrintStatement printstmt(expr);
+  stmt = &printstmt;
+  return stmt;
   // TODO: create a corresponding stmt and return it.
+
 }
 
 Statement* Parser::parseInput(TokenStream& tokens,
@@ -121,6 +129,10 @@ Statement* Parser::parseInput(TokenStream& tokens,
   }
 
   std::string varName = varToken->text;
+  Statement* stmt;
+  InputStatement inputstmt(varName);
+  stmt = &inputstmt;
+  return stmt;
   // TODO: create a corresponding stmt and return it.
 }
 
@@ -137,6 +149,10 @@ Statement* Parser::parseGoto(TokenStream& tokens,
 
   int targetLine = parseLiteral(lineToken);
   // TODO: create a corresponding stmt and return it.
+  Statement* stmt;
+  GotoStatement gotostmt(targetLine);
+  stmt = &gotostmt;
+  return stmt;
 }
 
 Statement* Parser::parseIf(TokenStream& tokens,
@@ -184,7 +200,10 @@ Statement* Parser::parseIf(TokenStream& tokens,
   }
 
   int targetLine = parseLiteral(lineToken);
-
+  Statement* stmt;
+  IfStatement ifstmt(leftExpr,op,rightExpr,targetLine);
+  stmt = &ifstmt;
+  return stmt;
   // TODO: create a corresponding stmt and return it.
 }
 
@@ -194,12 +213,20 @@ Statement* Parser::parseRem(TokenStream& tokens,
   if (!remInfo || remInfo->type != TokenType::REMINFO) {
     throw BasicError("SYNTAX ERROR");
   }
+  Statement* stmt;
+  RemStatement remstmt;
+  stmt = &remstmt;
+  return stmt;
   // TODO: create a corresponding stmt and return it.
 }
 
 Statement* Parser::parseEnd(TokenStream& tokens,
                             const std::string& originLine) const {
   // TODO: create a corresponding stmt and return it.
+  Statement* stmt;
+  EndStatement endstmt;
+  stmt = &endstmt;
+  return stmt;
 }
 
 Expression* Parser::parseExpression(TokenStream& tokens) const {
