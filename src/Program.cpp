@@ -1,5 +1,6 @@
 // TODO: Imply interfaces declared in the Program.hpp.
 #include "Program.hpp"
+#include <iostream>
 Program::Program() {
 }
 void Program::addStmt(int line, Statement* stmt) {
@@ -14,6 +15,7 @@ void Program::run() {
   while (programCounter_ != -1 && programEnd_ == false) {
     int tmp = programCounter_;
     const Statement* stmt = recorder_.get(programCounter_);
+    //std::cerr << programCounter_ << stmt->text() << std::endl;
     stmt->execute(vars_,*this);
     if (programCounter_ == tmp) programCounter_ = recorder_.nextLine(programCounter_);
   }

@@ -21,7 +21,7 @@ void PrintStatement::execute(VarState& state, Program& program) const {
   std::cout << expression->evaluate(state) << std::endl;
 }
 void InputStatement::execute(VarState& state, Program& program) const {
-  std::cout << "?";
+  std::cout << " ? ";
   int input_value;
   std::cin >> input_value;
   state.setValue(varName,input_value);

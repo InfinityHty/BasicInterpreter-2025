@@ -21,7 +21,7 @@ int main() {
     try {
       // TODO: The main function.
       TokenStream stream = lexer.tokenize(line);
-      //BASIC指令
+      // BASIC指令
       if (stream.peek()->type == TokenType::RUN) {
         program.run();
       } else if (stream.peek()->type == TokenType::LIST) {
@@ -31,7 +31,8 @@ int main() {
       } else if (stream.peek()->type == TokenType::QUIT) {
         exit(0);
       } else if (stream.peek()->type == TokenType::HELP) {
-        std::cout << "This is the help message." << std::endl;
+        std::cout << "Contact infinityhty@sjtu.edu.cn for more information!"
+                  << std::endl;
       } else {
         ParsedLine parse_line = parser.parseLine(stream, line);
         // 删除一行
@@ -46,7 +47,8 @@ int main() {
         }
         // 有行号的语句
         else {
-          program.addStmt(parse_line.getLine().value(),parse_line.getStatement());
+          program.addStmt(parse_line.getLine().value(),
+                          parse_line.getStatement());
         }
       }
     } catch (const BasicError& e) {
