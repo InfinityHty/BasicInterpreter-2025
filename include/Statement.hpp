@@ -26,34 +26,44 @@ class Statement {
 class LetStatement : public Statement {
 private:
   Expression* expression;
+  std::string varName;
 public:
   void execute(VarState& state, Program& program) const override;
-  LetStatement(std::string source,Expression* expr) : Statement(source) {
+  LetStatement(std::string varname,Expression* expr,std::string originLine) : Statement(originLine) {
     expression = expr;
+    this->varName = varname;
   }
+  //~LetStatement() override = default;
 };
 class PrintStatement : public Statement {
 private:
   Expression* expression;
 public:
   void execute(VarState& state, Program& program) const override;
-  PrintStatement(Expression* expr) : Statement("") {
+  PrintStatement(Expression* expr,std::string originLine) : Statement(originLine) {
     expression = expr;
   }
+  //~PrintStatement() override = default;
 };
 class InputStatement : public Statement {
+private:
+  std::string varName;
 public:
   void execute(VarState& state, Program& program) const override;
-  InputStatement(std::string source) : Statement(source) {}
+  InputStatement(std::string varname,std::string originLine) : Statement(originLine) {
+    this->varName = varname;
+  }
+  //~InputStatement() override = default;
 };
 class GotoStatement : public Statement {
 private:
   int line_number;
 public:
   void execute(VarState& state, Program& program) const override;
-  GotoStatement(int line) : Statement("") {
+  GotoStatement(int line,std::string originLine) : Statement(originLine) {
     line_number = line;
   }
+  //~GotoStatement() override = default;
 };
 class IfStatement : public Statement {
 private:
@@ -63,19 +73,22 @@ private:
   int target;
 public:
   void execute(VarState& state, Program& program) const override;
-  IfStatement(Expression* l,char op,Expression* r,int target) : Statement("") {
+  IfStatement(Expression* l,char op,Expression* r,int target,std::string originLine) : Statement(originLine) {
     left = l,right = r;
     this->op = op;
     this->target = target;
   }
+  //~IfStatement() override = default;
 };
 class RemStatement : public Statement {
 public:
   void execute(VarState& state, Program& program) const override;
-  RemStatement() : Statement("") {}
+  RemStatement(std::string originLine) : Statement(originLine) {}
+  //~RemStatement() override = default;
 };
 class EndStatement : public Statement {
 public:
   void execute(VarState& state, Program& program) const override;
-  EndStatement() : Statement("") {}
+  EndStatement(std::string originLine) : Statement(originLine) {}
+  //~EndStatement() override = default;
 };

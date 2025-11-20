@@ -1,7 +1,9 @@
 // TODO: Imply interfaces declared in the Recorder.hpp.
 #include "Recorder.hpp"
 #include<iostream>
-
+Recorder::~Recorder() {
+  sentences.clear();
+}
 void Recorder::add(int line,Statement* state) {
   sentences[line] = state;
 }
@@ -26,7 +28,7 @@ void Recorder::clear() noexcept {
 }
 void Recorder::printLines() const {
   for (auto it = sentences.begin(); it != sentences.end(); it++) {
-    std::cout << it->first << " " << it->second << std::endl;
+    std::cout << (it->second)->text() << std::endl;
   }
 }
 int Recorder::nextLine(int line) const noexcept {

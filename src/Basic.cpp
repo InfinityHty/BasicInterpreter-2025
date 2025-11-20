@@ -49,7 +49,6 @@ int main() {
           program.addStmt(parse_line.getLine().value(),parse_line.getStatement());
         }
       }
-
     } catch (const BasicError& e) {
       std::cout << e.message() << "\n";
     }

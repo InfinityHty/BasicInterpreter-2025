@@ -1,6 +1,7 @@
 // TODO: Imply interfaces declared in the Program.hpp.
 #include "Program.hpp"
-
+Program::Program() {
+}
 void Program::addStmt(int line, Statement* stmt) {
   recorder_.add(line,stmt);
 }

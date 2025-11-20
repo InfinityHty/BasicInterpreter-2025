@@ -15,7 +15,7 @@ const std::string& Statement::text() const noexcept { return source_; }
 
 // TODO: Imply interfaces declared in the Statement.hpp.
 void LetStatement::execute(VarState& state, Program& program) const{
-  state.setValue(text(),expression->evaluate(state));
+  state.setValue(varName,expression->evaluate(state));
 }
 void PrintStatement::execute(VarState& state, Program& program) const {
   std::cout << expression->evaluate(state) << std::endl;
@@ -24,7 +24,7 @@ void InputStatement::execute(VarState& state, Program& program) const {
   std::cout << "?";
   int input_value;
   std::cin >> input_value;
-  state.setValue(text(),input_value);
+  state.setValue(varName,input_value);
 }
 void GotoStatement::execute(VarState& state, Program& program) const {
   program.changePC(line_number);
