@@ -28,7 +28,7 @@ void Recorder::clear() noexcept {
 }
 void Recorder::printLines() const {
   for (auto it = sentences.begin(); it != sentences.end(); it++) {
-    std::cout << (it->second)->text() << std::endl;
+    std::cout << (it->second) << std::endl;
   }
 }
 int Recorder::nextLine(int line) const noexcept {

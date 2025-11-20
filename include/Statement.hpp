@@ -33,7 +33,9 @@ public:
     expression = expr;
     this->varName = varname;
   }
-  //~LetStatement() override = default;
+  ~LetStatement() override {
+    delete expression;
+  };
 };
 class PrintStatement : public Statement {
 private:
@@ -43,7 +45,9 @@ public:
   PrintStatement(Expression* expr,std::string originLine) : Statement(originLine) {
     expression = expr;
   }
-  //~PrintStatement() override = default;
+  ~PrintStatement() override {
+    delete expression;
+  }
 };
 class InputStatement : public Statement {
 private:
@@ -53,7 +57,7 @@ public:
   InputStatement(std::string varname,std::string originLine) : Statement(originLine) {
     this->varName = varname;
   }
-  //~InputStatement() override = default;
+  ~InputStatement() override = default;
 };
 class GotoStatement : public Statement {
 private:
@@ -63,7 +67,7 @@ public:
   GotoStatement(int line,std::string originLine) : Statement(originLine) {
     line_number = line;
   }
-  //~GotoStatement() override = default;
+  ~GotoStatement() override = default;
 };
 class IfStatement : public Statement {
 private:
@@ -78,17 +82,20 @@ public:
     this->op = op;
     this->target = target;
   }
-  //~IfStatement() override = default;
+  ~IfStatement() override {
+    delete left;
+    delete right;
+  }
 };
 class RemStatement : public Statement {
 public:
   void execute(VarState& state, Program& program) const override;
   RemStatement(std::string originLine) : Statement(originLine) {}
-  //~RemStatement() override = default;
+  ~RemStatement() override = default;
 };
 class EndStatement : public Statement {
 public:
   void execute(VarState& state, Program& program) const override;
   EndStatement(std::string originLine) : Statement(originLine) {}
-  //~EndStatement() override = default;
+  ~EndStatement() override = default;
 };
