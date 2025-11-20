@@ -22,9 +22,19 @@ void PrintStatement::execute(VarState& state, Program& program) const {
 }
 void InputStatement::execute(VarState& state, Program& program) const {
   std::cout << " ? ";
-  int input_value;
-  std::cin >> input_value;
-  state.setValue(varName,input_value);
+  std::string input;
+  getline(std::cin, input);
+  int input_value = 0;
+  bool valid = true;
+  for (int i = 0; i < input.size(); i++) {
+    if (input[i] > '9' || input[i] < '0') {
+      valid = false;
+      break;
+    }
+    else input_value = input_value * 10 + input[i] - '0';
+  }
+  if (valid) state.setValue(varName,input_value);
+  else throw BasicError("INVALID NUMBER");
 }
 void GotoStatement::execute(VarState& state, Program& program) const {
   program.changePC(line_number);

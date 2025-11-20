@@ -1,6 +1,7 @@
 // TODO: Imply interfaces declared in the Program.hpp.
 #include "Program.hpp"
 #include <iostream>
+#include "utils/Error.hpp"
 Program::Program() {
 }
 void Program::addStmt(int line, Statement* stmt) {
@@ -18,6 +19,10 @@ void Program::run() {
     //std::cerr << programCounter_ << stmt->text() << std::endl;
     stmt->execute(vars_,*this);
     if (programCounter_ == tmp) programCounter_ = recorder_.nextLine(programCounter_);
+    else if (!recorder_.hasLine(programCounter_)) {
+      throw BasicError("LINE NUMBER ERROR");
+      programCounter_ = -1;
+    }
   }
 }
 void Program::list() const {
