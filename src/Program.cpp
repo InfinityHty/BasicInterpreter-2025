@@ -16,12 +16,11 @@ void Program::run() {
   while (programCounter_ != -1 && programEnd_ == false) {
     int tmp = programCounter_;
     const Statement* stmt = recorder_.get(programCounter_);
-    //std::cerr << programCounter_ << stmt->text() << std::endl;
+    //std::cerr << programCounter_ << " " << stmt->text() << std::endl;
     stmt->execute(vars_,*this);
     if (programCounter_ == tmp) programCounter_ = recorder_.nextLine(programCounter_);
     else if (!recorder_.hasLine(programCounter_)) {
       throw BasicError("LINE NUMBER ERROR");
-      programCounter_ = -1;
     }
   }
 }

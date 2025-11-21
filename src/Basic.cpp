@@ -29,6 +29,7 @@ int main() {
       } else if (stream.peek()->type == TokenType::CLEAR) {
         program.clear();
       } else if (stream.peek()->type == TokenType::QUIT) {
+        program.clear();
         exit(0);
       } else if (stream.peek()->type == TokenType::HELP) {
         std::cout << "Contact infinityhty@sjtu.edu.cn for more information!"
@@ -47,8 +48,9 @@ int main() {
         }
         // 有行号的语句
         else {
+          //std::cerr << parse_line.getStatement()->text() << std::endl;
           program.addStmt(parse_line.getLine().value(),
-                          parse_line.getStatement());
+                          parse_line.fetchStatement());
         }
       }
     } catch (const BasicError& e) {

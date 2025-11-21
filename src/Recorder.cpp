@@ -2,14 +2,22 @@
 #include "Recorder.hpp"
 #include<iostream>
 Recorder::~Recorder() {
-  sentences.clear();
+  clear();
 }
 void Recorder::add(int line,Statement* state) {
+  if (sentences.find(line) != sentences.end()) {
+    const Statement* old = sentences[line];
+    delete old;
+  }
   sentences[line] = state;
+  //std::cerr << state->text() << std::endl;
 }
 void Recorder::remove(int line) {
-  if (hasLine(line))
+  if (hasLine(line)) {
+    const Statement* old = sentences[line];
+    delete old;
     sentences.erase(line);
+  }
 }
 //map的中[]返回类型不是const但用迭代器可以返回const
 const Statement* Recorder::get(int line) const noexcept {
@@ -24,6 +32,10 @@ bool Recorder::hasLine(int line) const noexcept {
   else return false;
 }
 void Recorder::clear() noexcept {
+  for (auto it = sentences.begin(); it != sentences.end(); ++it) {
+    const Statement* old = it->second;
+    delete old;
+  }
   sentences.clear();
 }
 void Recorder::printLines() const {
