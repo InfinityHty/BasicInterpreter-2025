@@ -44,7 +44,7 @@ void Program::changePC(int line) {
 }
 void Program::programEnd() {
   programEnd_ = true;
-  resetAfterRun();
+  //resetAfterRun();
 }
 void Program::resetAfterRun() noexcept {
   clear();
