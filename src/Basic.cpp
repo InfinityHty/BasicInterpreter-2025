@@ -41,7 +41,7 @@ int main() {
             parse_line.getLine().has_value()) {
           program.removeStmt(parse_line.getLine().value());
         }
-        // 没有行号的语句(LET,PRINT,INPUT)
+        // 没有行号的语句(LET,PRINT,INPUT,INDENT,DEDENT)
         else if (!parse_line.getLine().has_value() &&
                  parse_line.getStatement() != nullptr) {
           program.execute(parse_line.getStatement());

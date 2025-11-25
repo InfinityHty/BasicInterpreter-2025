@@ -18,7 +18,9 @@ enum class TokenType {
   CLEAR,
   QUIT,
   HELP,
-  // Basic lexical units
+  INDENT,
+  DEDENT,
+  // Basic lexical units + Scope
   IDENTIFIER,
   NUMBER,
   REMINFO,

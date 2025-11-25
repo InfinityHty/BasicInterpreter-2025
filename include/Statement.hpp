@@ -99,3 +99,15 @@ public:
   EndStatement(std::string originLine) : Statement(originLine) {}
   ~EndStatement() override = default;
 };
+class IndentStatement : public Statement {
+public:
+  void execute(VarState& state, Program& program) const override;
+  IndentStatement(std::string originLine) : Statement(originLine) {}
+  ~IndentStatement() override = default;
+};
+class DedentStatement : public Statement {
+  public:
+  void execute(VarState& state, Program& program) const override;
+  DedentStatement(std::string originLine) : Statement(originLine) {}
+  ~DedentStatement() override = default;
+};

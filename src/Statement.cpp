@@ -66,3 +66,9 @@ void RemStatement::execute(VarState& state, Program& program) const {}
 void EndStatement::execute(VarState& state, Program& program) const {
   program.programEnd();
 }
+void IndentStatement::execute(VarState& state, Program& program) const {
+  state.indent();
+}
+void DedentStatement::execute(VarState& state, Program& program) const {
+  state.dedent();
+}

@@ -6,11 +6,17 @@
 #include <vector>
 
 class VarState {
- public:
+public:
   void setValue(const std::string& name, int value);
   int getValue(const std::string& name) const;
   void clear();
-
- private:
-  std::unordered_map<std::string, int> values_;
+  void indent();
+  void dedent();
+  VarState() {
+    layer = 0;
+    values_.resize(1);
+  }
+private:
+  std::vector<std::unordered_map<std::string, int>>values_;
+  int layer;
 };
