@@ -30,6 +30,7 @@ void InputStatement::execute(VarState& state, Program& program) const {
     int i = 0, negative = 1;
     if (input[0] == '-') i = 1, negative = -1;
     for (; i < input.size(); i++) {
+      if (input[i] == '\r') continue;
       if (input[i] > '9' || input[i] < '0') {
         valid = false;
         break;
